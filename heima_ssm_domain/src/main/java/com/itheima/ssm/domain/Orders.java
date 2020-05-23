@@ -1,16 +1,21 @@
 package com.itheima.ssm.domain;
 
 import com.itheima.ssm.utils.DateUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
 
 //订单
 public class Orders {
-    private String id;
+    private Integer id;
     private String orderNum;
-    private Date orderTime;
-    private String orderTimeStr;
+
+
+    private String orderTime;
+
+
+
     private int orderStatus;
     private String orderStatusStr;
     private int peopleCount;
@@ -21,12 +26,17 @@ public class Orders {
     private String payTypeStr;
     private String orderDesc;
 
+
+
+
     public String getOrderStatusStr() {
         //订单状态(0 未支付 1 已支付)
         if(orderStatus==0){
             orderStatusStr="未支付";
         }else if(orderStatus==1){
             orderStatusStr="已支付";
+        }else {
+            orderStatusStr="填写正确信息";
         }
         return orderStatusStr;
     }
@@ -35,11 +45,11 @@ public class Orders {
         this.orderStatusStr = orderStatusStr;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,24 +61,14 @@ public class Orders {
         this.orderNum = orderNum;
     }
 
-    public Date getOrderTime() {
+
+    public String getOrderTime() {
         return orderTime;
     }
-
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
     }
 
-    public String getOrderTimeStr() {
-        if(orderTime!=null){
-            orderTimeStr= DateUtils.date2String(orderTime,"yyyy-MM-dd HH:mm");
-        }
-        return orderTimeStr;
-    }
-
-    public void setOrderTimeStr(String orderTimeStr) {
-        this.orderTimeStr = orderTimeStr;
-    }
 
     public int getOrderStatus() {
         return orderStatus;

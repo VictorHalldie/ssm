@@ -10,20 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 @Service
 @Transactional
-public class ProductServiceImpl implements IProductService
-{
+public class ProductServiceImpl implements IProductService{
 
     @Autowired
     private IProductDao productDao;
 
+    @Override
+    public void save(Product product) {
+        productDao.save(product);
+    }
 
     @Override
     public List<Product> findAll() throws Exception{
         return productDao.findAll();
-    }
-
-    @Override
-    public void save(Product product) throws Exception {
-        productDao.save(product);
     }
 }

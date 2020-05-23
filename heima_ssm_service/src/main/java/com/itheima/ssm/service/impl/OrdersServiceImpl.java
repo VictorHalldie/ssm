@@ -16,17 +16,18 @@ public class OrdersServiceImpl implements IOrdersService {
 
     @Autowired
     private IOrdersDao ordersDao;
-
+//int page, int size
     @Override
     public List<Orders> findAll(int page, int size) throws Exception {
 
+        //page, size
         //参数pageNum 是页码值   参数pageSize 代表是每页显示条数
-        PageHelper.startPage(page, size);
+        PageHelper.startPage(page,size);
         return ordersDao.findAll();
     }
 
     @Override
-    public Orders findById(String ordersId) throws Exception {
+    public Orders findById(String ordersId) throws Exception{
         return ordersDao.findById(ordersId);
     }
 }
