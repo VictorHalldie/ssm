@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,9 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private IUserDao userDao;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -48,4 +52,33 @@ public class UserServiceImpl implements IUserService {
     public List<UserInfo> findAll() throws Exception {
         return userDao.findAll();
     }
+
+
+
+    @Override
+    public void save(UserInfo userInfo) throws Exception {
+        //对密码进行加密处理
+        userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
+        userDao.save(userInfo);
+    }
+
+    @Override
+    public UserInfo findById(String id) throws Exception {
+        return userDao.findById(id);
+    }
+
+    @Override
+    public List<Role> findOtherRole(String userId) throws Exception {
+        return userDao.findOtherRole(userId);
+    }
+
+    @Override
+    public void addRoleToUser(String userId, String[] roleIds) {
+
+        for (String roleId : roleIds) {
+            userDao.addRoleToUser(userId,roleId);
+        }
+    }
+
+
 }

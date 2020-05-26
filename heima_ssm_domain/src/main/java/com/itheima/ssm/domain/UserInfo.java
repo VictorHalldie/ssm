@@ -1,6 +1,8 @@
 package com.itheima.ssm.domain;
 
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import java.util.List;
 
 //与数据库钟users对应
@@ -63,6 +65,12 @@ public class UserInfo {
     }
 
     public String getStatusStr() {
+        if (status ==1){
+            statusStr ="开启";
+        }else if (status == 0 ){
+            statusStr="未开启";
+        }
+
         return statusStr;
     }
 
