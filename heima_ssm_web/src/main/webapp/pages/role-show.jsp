@@ -177,18 +177,14 @@
                                 </tr>
 
                                 <tbody>
-                                <c:forEach  items="${role}" var="role" varStatus="vs">
-                                <tr data-tt-id="${vs.index+1}" data-tt-parent-id="0">
-                                    <td>${role.roleName}</td>
-                                    <td>${role.roleDesc}</td>
-                                </tr>
+
                                     <c:forEach items="${role.permissions}" var="permission">
-                                <tr data-tt-id="1-1" data-tt-parent-id="${vs.index+1}">
+                                <tr >
                                     <td>${permission.permissionName}</td>
                                     <td>${permission.url}</td>
                                 </tr>
                                     </c:forEach>
-                                </c:forEach>
+
 
                                 </tbody>
                             </table>
